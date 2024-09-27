@@ -1,0 +1,56 @@
+<div *ngIf="pokemonData$ | async as data">
+  <h1>Pokedex</h1>
+
+  <div class="poke-container" id="poke-container">
+    <div *ngFor="let pokemon of data.details" class="pokemon" (click)="showPokemonDetails(pokemon)" [style.background-color]="getPokemonBackgroundColor()(pokemon)">
+      <div class="img-container">
+          <img [src]="pokemon.sprites.other['official-artwork'].front_default" [alt]="pokemon.name" loading="lazy">
+      </div>
+      <div class="info">
+          <span class="number">#{{ pokemon.id }}</span>
+          <h3 class="name">{{ pokemon.name }}</h3>
+          <small class="types">
+              <span class="type" *ngFor="let type of pokemon.types" [style.background-color]="getTypeColor()(type)">{{ type.type.name }}</span>
+          </small>
+      </div>
+    </div>
+  </div>
+  <div #loadTrigger class="load-trigger">
+    <div *ngIf="loading()" class="loader-overlay">
+      <div class="wrapper">
+        <div class="pokeball"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedPokemon()" class="pokemon-card-overlay" (click)="closeDetails()">
+  <div class="pokemon-card" (click)="$event.stopPropagation()" [style.background-color]="getPokemonBackgroundColor()(selectedPokemon()!)">
+    <div class="card-header">
+      <h2>{{ selectedPokemon()!.name }}</h2>
+      <span class="number">HP {{ selectedPokemon()!.stats[0].base_stat }}</span>
+    </div>
+    <div class="card-body">
+      <div class="image-container" [ngClass]="selectedPokemon()!.types[0].type.name">
+        <img [src]="selectedPokemon()!.sprites.other.showdown.front_default !== '' ? selectedPokemon()!.sprites.other.showdown.front_default : selectedPokemon()!.sprites.other['official-artwork'].front_default" [alt]="selectedPokemon()!.name">
+      </div>
+      <div class="info">
+        <p>Height: {{ selectedPokemon()!.height / 10 }} m</p>
+        <p>Weight: {{ selectedPokemon()!.weight / 10 }} kg</p>
+      </div>
+      <div class="abilities">
+        <h3>Attack</h3>
+        <ul>
+          <li *ngFor="let ability of selectedPokemon()!.abilities">
+            {{ ability.ability.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="types">
+        <span class="type" *ngFor="let type of selectedPokemon()!.types" [style.background-color]="getTypeColor()(type)">{{ type.type.name }}</span>
+      </div>
+    </div>
+  </div>
+</div>

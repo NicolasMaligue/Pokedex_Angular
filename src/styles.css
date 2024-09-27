@@ -1,1 +1,275 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: linear-gradient(to right, #d4d3dd, #efefbb);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+h1 {
+  letter-spacing: 3px;
+  margin: 0;
+  font-family: 'Pokemon Solid', sans-serif;
+  display: flex;
+  justify-content: center;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(21, 108, 222);
+  color: #ffcc03;
+  font-size: 50px;
+}
+
+/* Pokemon list */
+
+.poke-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: space-between;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.pokemon {
+  background-color: #eee;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.pokemon:hover {
+  transform: translateY(-5px);
+}
+
+.pokemon .img-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+}
+
+.pokemon .img-container img {
+  max-width: 90%;
+  margin-top: 20px;
+}
+
+.pokemon .info {
+  margin-top: 20px;
+}
+
+.pokemon .info .number {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 0.8em;
+}
+
+.pokemon .info .name {
+  margin: 15px 0 7px;
+  letter-spacing: 1px;
+}
+
+/* Pokemon card */
+
+.pokemon-card-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.pokemon-card {
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 300px;
+  max-width: 90%;
+  text-align: center;
+  border: 8px solid #fce077;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 24px;
+  text-transform: capitalize;
+}
+
+.card-header .number {
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-body .image-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body img {
+  width: 150px;
+  height: 150px;
+}
+
+.card-body .info {
+  font-size: 0.8em;
+  margin-bottom: 15px;
+}
+
+.card-body .info p {
+  display: inline;
+  margin-right: 10px;
+}
+
+.abilities {
+  text-align: left;
+  width: 100%;
+}
+
+.abilities h3 {
+  margin-bottom: 5px;
+}
+
+.abilities ul {
+  list-style-type: none;
+  padding-left: 10px;
+  margin-top: 0;
+}
+
+.card-body img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.stats {
+  width: 100%;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.stat-name {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.card-footer {
+  margin-top: 20px;
+}
+
+.types {
+  display: flex;
+  justify-content: center;
+}
+
+.type {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+
+/* Pokeball loader */
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.pokeball {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid;
+  animation: frames .8s linear 0s infinite;
+}
+
+.pokeball:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background-color: red;
+  border-bottom: 4px solid;
+  top: -4px
+}
+
+.pokeball:before {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  width: 10px;
+  height: 10px;
+  border: 4px solid;
+  border-radius: 50%;
+  bottom: 18px;
+  right: 18px;
+  z-index: 1;
+}
+
+@keyframes frames {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
